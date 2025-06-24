@@ -36,52 +36,54 @@ Node* insert(Node* root, int data) {
 
 }
 
-Node* PreOrder(Node* root) { // preorder traversal
-    // ex creating copy of tree
-    if (root == nullptr) {
-        return root;
-    }
-    cout << root->data << endl;
-    root->left = PreOrder(root->left);
-    root->right = PreOrder(root->right);
+void PreOrder(Node* root) {
+    if (root == nullptr) return;
+    cout << root->data << " ";
+    PreOrder(root->left);
+    PreOrder(root->right);
 }
 
-Node* PostOrder(Node* root) { 
-    // like for deleting the tree
-    if (root == nullptr) {
-        return root;
-    }
-
-    root->left = PreOrder(root->left);
-    root->right = PreOrder(root->right);
-
-    cout << root->data << endl;
+void PostOrder(Node* root) {
+    if (root == nullptr) return;
+    PostOrder(root->left);
+    PostOrder(root->right);
+    cout << root->data << " ";
 }
 
-Node* InOrder(Node* root)  {
-    // when u want a sorted order of BST
-    if (root == nullptr) {
-        return root;
-    }
-
-    root->left = PreOrder(root->left);
-
-    cout << root->data << endl;
-    root->right = PreOrder(root->right);
+void InOrder(Node* root) {
+    if (root == nullptr) return;
+    InOrder(root->left);
+    cout << root->data << " ";
+    InOrder(root->right);
 }
 
-Node* LevelOrder(Node* root) {
-    // process
-    if (root == nullptr) {return root;}
+void LevelOrder(Node* root) {
+    if (root == nullptr) return;
     queue<Node*> Q;
-
+    Q.push(root); // ✅ necessary
     while (!Q.empty()) {
-        Node* current = Q.front();
+        Node* current = Q.front(); Q.pop();
         cout << current->data << " ";
         if (current->left != nullptr) Q.push(current->left);
         if (current->right != nullptr) Q.push(current->right);
-        Q.pop();
     }
+}
+
+
+
+Node* FindMin(Node* root) {
+    // the min will always be on the left side in a BST
+    // we find the min of the right child bc
+    // it will always be less than all of the right child successors
+    // and more than all of left
+    while (root->left != nullptr) { // check if left child is null
+        // while it isnt null we keep going
+        root = root->left;
+
+        // once the next left child is null itll stop and return that current node
+    }
+
+    return root;
 }
 Node* Delete(Node* root, int data) {
     
@@ -129,25 +131,47 @@ Node* Delete(Node* root, int data) {
     return root;
 }
 
-//
-Node* FindMin(Node* root) {
-    // the min will always be on the left side in a BST
-    // we find the min of the right child bc
-    // it will always be less than all of the right child successors
-    // and more than all of left
-    while (root->left != nullptr) { // check if left child is null
-        // while it isnt null we keep going
-        root = root->left;
 
-        // once the next left child is null itll stop and return that current node
-    }
 
-    return root;
+void ClearTree(Node* root) {
+    if (root == nullptr) return;
+    ClearTree(root->left);
+    ClearTree(root->right);
+    delete root;
 }
+
 int main() {
-    cout << "testing testing" << endl;
+    Node* root = nullptr;
 
-    Node* root = nullptr; // creating an empty tree
+    // Insert some nodes into the BST
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 70);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 60);
+    root = insert(root, 80);
 
+    cout << "\nInorder (should be sorted): ";
+    InOrder(root);
 
-}   
+    cout << "\nPreorder (root first): ";
+    PreOrder(root);
+
+    cout << "\nPostorder (root last): ";
+    PostOrder(root);
+
+    cout << "\nLevel Order (BFS): ";
+    LevelOrder(root);
+
+    cout << "\n\nDeleting 70 (node with two children)...";
+    root = Delete(root, 70);
+
+    cout << "\nInorder after deleting 70: ";
+    InOrder(root);
+
+    ClearTree(root);
+    root = nullptr;
+
+    return 0;
+}
