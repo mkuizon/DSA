@@ -1,5 +1,5 @@
-import math
+s = 'a'
 
-print(isinstance(int("-11"),int))
+s = s + 'b'
 
-print(math.ceil(6 / -132))
+print(s)
