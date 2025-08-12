@@ -28,3 +28,8 @@ word = "icecream"
 
 print(reverseVowels(word))
 
+s = 'a'
+
+s = s + 'b'
+
+print(s)
