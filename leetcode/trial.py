@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 def reverseVowels(s: str) -> str:
     vowel = ["a", "e", "i", "o", "u"]
     out = [x for x in s]
@@ -33,3 +34,7 @@ s = 'a'
 s = s + 'b'
 
 print(s)
+=======
+same= "?same"
+print(same[1])
+>>>>>>> cfcb8cd (Updating some files)
