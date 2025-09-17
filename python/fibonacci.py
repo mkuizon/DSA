@@ -18,6 +18,14 @@ def fibonacci(n):
     print(dp)
     return dp[n]
 
-print(f"{fibonacci(10) = }")  # Output: 55
+def simple_fibo(n):
+    if n <= 1:
+        return n 
+
+    return simple_fibo(n-1) + simple_fibo(n-2)
+
+# print(f"{fibonacci(10) = }")  # Output: 55
 
 #  print(f"{fibonacci1(8) = }")
+
+print(simple_fibo(10))
