@@ -1,18 +1,18 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
-bool determine(bool a, bool b){
-    if (a && b) { return true;} else {return false;}
+// bool determine(bool a, bool b){
+//     if (a && b) { return true;} else {return false;}
 
-};
+// };
 
 int main() {
-    bool a = true;
-    bool b = false;
-
-    cout << determine(a,b) << endl;
     
-
+    int md = 7 / 2;
+    // md = ceil(md);
+    
+    cout << md << endl;
     return -1;
 
 }
